@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InvoiceFlow — Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4F46E5;
+    --primary-light: #EEF2FF;
+    --secondary: #06B6D4;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-subtle: #94A3B8;
+    --border: #E2E8F0;
+    --success: #22C55E;
+    --success-light: #F0FDF4;
+    --warning: #F59E0B;
+    --warning-light: #FFFBEB;
+    --error: #EF4444;
+    --error-light: #FEF2F2;
+    --sidebar-w: 240px;
+    --header-h: 64px;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+
+  /* ── Shell ── */
+  .shell { display: flex; height: 100vh; overflow: hidden; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: var(--sidebar-w); min-width: var(--sidebar-w);
+    background: var(--card); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; padding: 0; z-index: 10;
+  }
+  .sidebar-logo {
+    height: var(--header-h); display: flex; align-items: center;
+    padding: 0 20px; border-bottom: 1px solid var(--border); gap: 10px;
+  }
+  .logo-mark {
+    width: 30px; height: 30px; background: var(--primary); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 13px;
+  }
+  .logo-text { font-weight: 700; font-size: 15px; color: var(--text); }
+  .sidebar-nav { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .nav-section-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--text-subtle); padding: 8px 10px 4px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+    border-radius: var(--radius-sm); cursor: pointer; color: var(--text-muted);
+    font-size: 13.5px; font-weight: 500; transition: all .12s;
+    text-decoration: none; user-select: none;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text); }
+  .nav-item.active { background: var(--primary-light); color: var(--primary); }
+  .nav-item .icon { width: 16px; height: 16px; flex-shrink: 0; opacity: .75; }
+  .nav-item.active .icon { opacity: 1; }
+  .nav-badge {
+    margin-left: auto; background: var(--primary); color: #fff;
+    font-size: 10px; font-weight: 600; border-radius: 99px; padding: 1px 6px;
+  }
+  .sidebar-footer {
+    padding: 12px 10px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .avatar {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--primary-light);
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+    font-weight: 600; color: var(--primary); flex-shrink: 0;
+  }
+  .avatar-info { flex: 1; min-width: 0; }
+  .avatar-name { font-size: 12.5px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .avatar-role { font-size: 11px; color: var(--text-subtle); }
+
+  /* ── Main Area ── */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* ── Header ── */
+  .header {
+    height: var(--header-h); background: var(--card); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 28px; gap: 16px; flex-shrink: 0;
+  }
+  .header-title { font-size: 16px; font-weight: 600; flex: 1; }
+  .header-search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 6px 12px; width: 240px; color: var(--text-muted); font-size: 13px;
+  }
+  .header-actions { display: flex; align-items: center; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500; cursor: pointer; border: none;
+    transition: all .12s; text-decoration: none;
+  }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #4338CA; }
+  .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-ghost { background: transparent; color: var(--text-muted); }
+  .btn-ghost:hover { background: var(--bg); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+  .btn-icon { padding: 7px; width: 34px; height: 34px; justify-content: center; }
+  .icon-btn {
+    width: 34px; height: 34px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg); border: 1px solid var(--border);
+    cursor: pointer; color: var(--text-muted);
+  }
+
+  /* ── Content ── */
+  .content { flex: 1; overflow-y: auto; padding: 28px; }
+
+  /* ── Page sections ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── Cards & Grid ── */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .card-pad { padding: 20px 24px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow);
+  }
+  .stat-label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 6px; }
+  .stat-change { font-size: 12px; font-weight: 500; }
+  .stat-change.up { color: var(--success); }
+  .stat-change.down { color: var(--error); }
+  .stat-change.neutral { color: var(--text-muted); }
+  .stat-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 16px;
+  }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left; font-size: 11.5px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em;
+    padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg);
+  }
+  tbody tr { border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg); }
+  tbody td { padding: 13px 16px; font-size: 13.5px; color: var(--text); }
+  .td-muted { color: var(--text-muted); }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+  }
+  .badge-success { background: var(--success-light); color: #16A34A; }
+  .badge-warning { background: var(--warning-light); color: #D97706; }
+  .badge-error { background: var(--error-light); color: #DC2626; }
+  .badge-info { background: var(--primary-light); color: var(--primary); }
+  .badge-neutral { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+  .badge-dot::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: inline-block; }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .section-subtitle { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Page title block ── */
+  .page-title-block { margin-bottom: 28px; }
+  .page-title { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.2; }
+  .page-subtitle { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ── Two-col layout ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── Form elements ── */
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 12.5px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+  .form-input {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 13.5px; color: var(--text);
+    background: var(--card); font-family: 'Inter', sans-serif;
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+  .form-input.placeholder { color: var(--text-subtle); }
+  .form-select {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 13.5px; color: var(--text);
+    background: var(--card); font-family: 'Inter', sans-serif; appearance: none;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── Invoice form specific ── */
+  .invoice-line-header {
+    display: grid; grid-template-columns: 2fr 80px 100px 100px 40px;
+    gap: 10px; padding: 8px 0; font-size: 11.5px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em;
+    border-bottom: 1px solid var(--border); margin-bottom: 8px;
+  }
+  .invoice-line {
+    display: grid; grid-template-columns: 2fr 80px 100px 100px 40px;
+    gap: 10px; margin-bottom: 8px; align-items: center;
+  }
+  .invoice-totals { width: 280px; margin-left: auto; margin-top: 16px; }
+  .invoice-total-row {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13.5px; color: var(--text-muted);
+  }
+  .invoice-total-row.grand {
+    font-size: 16px; font-weight: 700; color: var(--text); border-bottom: none; padding-top: 12px;
+  }
+
+  /* ── Client selector ── */
+  .client-selector {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .client-selector-header {
+    padding: 12px 16px; display: flex; align-items: center;
+    justify-content: space-between; cursor: pointer; background: var(--card);
+  }
+  .client-selector-name { font-size: 14px; font-weight: 600; }
+  .client-selector-email { font-size: 12px; color: var(--text-muted); }
+
+  /* ── Charts (placeholder) ── */
+  .chart-placeholder {
+    background: var(--bg); border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-subtle); font-size: 12px; position: relative; overflow: hidden;
+  }
+  .chart-bars { display: flex; align-items: flex-end; gap: 8px; padding: 12px 16px; height: 100%; width: 100%; }
+  .chart-bar { background: var(--primary-light); border-radius: 4px 4px 0 0; flex: 1; transition: background .1s; }
+  .chart-bar.highlight { background: var(--primary); }
+  .chart-bar:hover { background: var(--primary); }
+  .donut-placeholder {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: conic-gradient(var(--primary) 0% 42%, var(--secondary) 42% 65%, var(--success) 65% 82%, var(--border) 82% 100%);
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .donut-hole {
+    width: 72px; height: 72px; border-radius: 50%; background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+
+  /* ── Timeline / Activity ── */
+  .activity-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot {
+    width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0;
+  }
+  .activity-dot.success { background: var(--success); }
+  .activity-dot.info { background: var(--primary); }
+  .activity-dot.warning { background: var(--warning); }
+  .activity-text { font-size: 13px; color: var(--text); }
+  .activity-time { font-size: 11.5px; color: var(--text-subtle); margin-top: 2px; }
+
+  /* ── Workflow builder ── */
+  .workflow-canvas {
+    background: var(--bg); border-radius: var(--radius);
+    border: 1px dashed var(--border); min-height: 360px;
+    display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 40px;
+  }
+  .wf-node {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px; min-width: 160px;
+    box-shadow: var(--shadow); position: relative; flex-shrink: 0;
+  }
+  .wf-node.trigger { border-left: 3px solid var(--primary); }
+  .wf-node.condition { border-left: 3px solid var(--warning); }
+  .wf-node.action { border-left: 3px solid var(--success); }
+  .wf-node-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); margin-bottom: 4px; }
+  .wf-node-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .wf-node-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+  .wf-arrow {
+    display: flex; align-items: center; padding: 0 12px; color: var(--text-subtle); flex-shrink: 0;
+    font-size: 18px; margin-top: 20px;
+  }
+  .wf-add-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: 2px dashed var(--border);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: var(--text-subtle); font-size: 16px; flex-shrink: 0; margin-top: 20px;
+  }
+
+  /* ── Progress bar ── */
+  .progress-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; }
+
+  /* ── Tabs ── */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab {
+    padding: 10px 16px; font-size: 13.5px; font-weight: 500; cursor: pointer;
+    color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* ── Toggle ── */
+  .toggle-wrap { display: flex; align-items: center; gap: 10px; }
+  .toggle {
+    width: 36px; height: 20px; border-radius: 99px; background: var(--border);
+    cursor: pointer; position: relative; transition: background .2s; flex-shrink: 0;
+  }
+  .toggle.on { background: var(--primary); }
+  .toggle::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 14px; height: 14px; border-radius: 50%; background: #fff;
+    transition: left .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .toggle.on::after { left: 19px; }
+  .toggle-label { font-size: 13.5px; color: var(--text); }
+  .toggle-sub { font-size: 12px; color: var(--text-muted); }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--text-muted);
+  }
+  .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: .4; }
+  .empty-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .empty-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── Quick action chips ── */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border: 1px solid var(--border); border-radius: 99px;
+    font-size: 12.5px; font-weight: 500; color: var(--text-muted); cursor: pointer;
+    background: var(--card);
+  }
+  .chip:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+  /* ── Divider ── */
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  /* ── Misc layout helpers ── */
+  .flex { display: flex; }
+  .flex-col { display: flex; flex-direction: column; }
+  .items-center { align-items: center; }
+  .justify-between { justify-content: space-between; }
+  .gap-4 { gap: 4px; }
+  .gap-8 { gap: 8px; }
+  .gap-12 { gap: 12px; }
+  .gap-16 { gap: 16px; }
+  .gap-24 { gap: 24px; }
+  .mt-4 { margin-top: 4px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-12 { margin-top: 12px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-20 { margin-top: 20px; }
+  .mt-24 { margin-top: 24px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-20 { margin-bottom: 20px; }
+  .mb-24 { margin-bottom: 24px; }
+  .w-full { width: 100%; }
+  .text-sm { font-size: 12.5px; }
+  .text-muted { color: var(--text-muted); }
+  .text-right { text-align: right; }
+  .font-semibold { font-weight: 600; }
+  .font-bold { font-weight: 700; }
+
+  /* ── Page nav tabs at top ── */
+  .page-nav {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 0; display: flex; overflow-x: auto;
+  }
+  .page-nav-item {
+    padding: 0 20px; height: 44px; display: flex; align-items: center;
+    font-size: 13px; font-weight: 500; color: var(--text-muted);
+    border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .page-nav-item:hover { color: var(--text); }
+  .page-nav-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* ── Settings layout ── */
+  .settings-grid { display: grid; grid-template-columns: 200px 1fr; gap: 24px; }
+  .settings-menu { display: flex; flex-direction: column; gap: 2px; }
+  .settings-menu-item {
+    padding: 8px 12px; border-radius: var(--radius-sm); cursor: pointer;
+    font-size: 13.5px; font-weight: 500; color: var(--text-muted);
+  }
+  .settings-menu-item:hover { background: var(--bg); color: var(--text); }
+  .settings-menu-item.active { background: var(--primary-light); color: var(--primary); }
+
+  /* ── Notification dot ── */
+  .notif-dot {
+    width: 8px; height: 8px; background: var(--error); border-radius: 50%;
+    border: 2px solid var(--card); position: absolute; top: -2px; right: -2px;
+  }
+
+  /* scroll fix */
+  .content::-webkit-scrollbar { width: 4px; }
+  .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">IF</div>
+      <div class="logo-text">InvoiceFlow</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a class="nav-item active" onclick="showPage('dashboard')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" onclick="showPage('invoices')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l2 2v10H3z"/><path d="M5 6h6M5 9h4"/></svg>
+        Invoices
+        <span class="nav-badge">3</span>
+      </a>
+      <a class="nav-item" onclick="showPage('clients')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+        Clients
+      </a>
+      <a class="nav-item" onclick="showPage('payments')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="14" height="9" rx="1.5"/><path d="M1 7h14"/></svg>
+        Payments
+      </a>
+      <div class="nav-section-label" style="margin-top:8px;">Tools</div>
+      <a class="nav-item" onclick="showPage('automations')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h3l2-5 3 10 2-5h2"/></svg>
+        Automations
+      </a>
+      <a class="nav-item" onclick="showPage('reports')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 13l4-5 3 3 3-6 3 3"/><path d="M1 13h14"/></svg>
+        Reports
+      </a>
+      <div class="nav-section-label" style="margin-top:8px;">Account</div>
+      <a class="nav-item" onclick="showPage('settings')">
+        <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M3 13l1.4-1.4M11.6 4.4L13 3"/></svg>
+        Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">GS</div>
+      <div class="avatar-info">
+        <div class="avatar-name">Gabi Santos</div>
+        <div class="avatar-role">Pro Plan</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <div class="main">
+
+    <!-- ── Header ── -->
+    <header class="header">
+      <div class="header-title" id="header-title">Dashboard</div>
+      <div class="header-search">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M10 10l3 3"/></svg>
+        Search…
+      </div>
+      <div class="header-actions">
+        <div class="icon-btn" style="position:relative;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1a5 5 0 015 5v2l1 2H2l1-2V6a5 5 0 015-5z"/><path d="M6 13a2 2 0 004 0"/></svg>
+          <div class="notif-dot"></div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('create-invoice')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>
+          New Invoice
+        </button>
+      </div>
+    </header>
+
+    <!-- ── Page Nav (shown on some pages) ── -->
+    <div class="page-nav" id="page-nav" style="display:none;">
+    </div>
+
+    <!-- ═══════════ PAGES ═══════════ -->
+    <div class="content">
+
+      <!-- ───────────────────────────
+           PAGE 1 · DASHBOARD
+      ─────────────────────────────── -->
+      <div class="page active" id="page-dashboard">
+
+        <div class="page-title-block">
+          <div class="page-title">Good morning, Gabi 👋</div>
+          <div class="page-subtitle">Here's what's happening with your business today.</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#EEF2FF;">💰</div>
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value">$48,290</div>
+            <div class="stat-change up">↑ 12.4% vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#F0FDF4;">📄</div>
+            <div class="stat-label">Outstanding</div>
+            <div class="stat-value">$12,480</div>
+            <div class="stat-change neutral">8 invoices pending</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#FFFBEB;">⏱</div>
+            <div class="stat-label">Overdue</div>
+            <div class="stat-value">$3,200</div>
+            <div class="stat-change down">↑ 3 overdue invoices</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#ECFEFF;">👥</div>
+            <div class="stat-label">Active Clients</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change up">↑ 2 new this month</div>
+          </div>
+        </div>
+
+        <!-- Revenue chart + Activity -->
+        <div class="two-col mb-24">
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="section-title">Revenue Overview</div>
+                  <div class="section-subtitle">Monthly revenue for 2025</div>
+                </div>
+                <div class="flex gap-8">
+                  <span class="chip">Monthly</span>
+                  <span class="chip" style="background:var(--primary-light);border-color:var(--primary);color:var(--primary);">Quarterly</span>
+                </div>
+              </div>
+            </div>
+            <div style="height:180px; padding: 8px 16px 0;">
+              <div class="chart-bars" style="height:160px;">
+                <div class="chart-bar" style="height:45%;"></div>
+                <div class="chart-bar" style="height:60%;"></div>
+                <div class="chart-bar" style="height:52%;"></div>
+                <div class="chart-bar" style="height:70%;"></div>
+                <div class="chart-bar" style="height:65%;"></div>
+                <div class="chart-bar" style="height:80%;"></div>
+                <div class="chart-bar highlight" style="height:90%;"></div>
+                <div class="chart-bar" style="height:78%;"></div>
+                <div class="chart-bar" style="height:85%;"></div>
+                <div class="chart-bar" style="height:72%;"></div>
+                <div class="chart-bar" style="height:68%;"></div>
+                <div class="chart-bar" style="height:55%;"></div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 24px 14px;font-size:11px;color:var(--text-subtle);">
+              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+              <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Recent Activity</div>
+            </div>
+            <div class="card-pad">
+              <div class="activity-item">
+                <div class="activity-dot success"></div>
+                <div>
+                  <div class="activity-text"><strong>Acme Corp</strong> paid Invoice #INV-0082</div>
+                  <div class="activity-time">2 minutes ago · $4,200.00</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot info"></div>
+                <div>
+                  <div class="activity-text">Invoice #INV-0083 sent to <strong>Bright Studio</strong></div>
+                  <div class="activity-time">1 hour ago · $1,850.00</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot warning"></div>
+                <div>
+                  <div class="activity-text">Reminder sent to <strong>TechVision Inc</strong></div>
+                  <div class="activity-time">3 hours ago · $2,700.00 overdue</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot success"></div>
+                <div>
+                  <div class="activity-text">New client <strong>Nova Design Co</strong> added</div>
+                  <div class="activity-time">Yesterday at 4:32 PM</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot info"></div>
+                <div>
+                  <div class="activity-text">Invoice #INV-0081 created for <strong>Acme Corp</strong></div>
+                  <div class="activity-time">Yesterday at 2:10 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent invoices + Invoice status -->
+        <div class="two-col">
+          <div class="card">
+            <div class="card-pad flex justify-between items-center" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Recent Invoices</div>
+              <button class="btn btn-ghost btn-sm" onclick="showPage('invoices')">View all →</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr>
+                  <th>Invoice</th><th>Client</th><th>Amount</th><th>Status</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td>#INV-0083</td><td>Bright Studio</td><td>$1,850</td><td><span class="badge badge-warning badge-dot">Sent</span></td></tr>
+                  <tr><td>#INV-0082</td><td>Acme Corp</td><td>$4,200</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                  <tr><td>#INV-0081</td><td>TechVision</td><td>$2,700</td><td><span class="badge badge-error badge-dot">Overdue</span></td></tr>
+                  <tr><td>#INV-0080</td><td>Loops Agency</td><td>$960</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                  <tr><td>#INV-0079</td><td>Nova Design</td><td>$3,100</td><td><span class="badge badge-neutral">Draft</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-pad flex justify-between items-center" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Invoice Status</div>
+            </div>
+            <div class="card-pad">
+              <div class="flex items-center gap-24" style="margin-bottom:20px;">
+                <div class="donut-placeholder">
+                  <div class="donut-hole">72%</div>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:10px;">
+                  <div>
+                    <div class="flex justify-between text-sm mb-4"><span>Paid</span><span class="font-semibold">$28,400</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:58%;background:var(--primary);"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-4"><span>Outstanding</span><span class="font-semibold">$12,480</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:25%;background:var(--secondary);"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-4"><span>Overdue</span><span class="font-semibold">$3,200</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:10%;background:var(--error);"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-4"><span>Draft</span><span class="font-semibold">$4,210</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:7%;background:var(--border);"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dashboard -->
+
+
+      <!-- ───────────────────────────
+           PAGE 2 · INVOICES LIST
+      ─────────────────────────────── -->
+      <div class="page" id="page-invoices">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">Invoices</div>
+            <div class="page-subtitle">83 invoices · $48,290 total</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M4 8h8M6 12h4"/></svg>
+              Filter
+            </button>
+            <button class="btn btn-secondary">Export</button>
+            <button class="btn btn-primary" onclick="showPage('create-invoice')">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>
+              New Invoice
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter chips -->
+        <div class="flex gap-8 mb-16">
+          <span class="chip" style="background:var(--primary-light);border-color:var(--primary);color:var(--primary);">All (83)</span>
+          <span class="chip">Draft (5)</span>
+          <span class="chip">Sent (8)</span>
+          <span class="chip">Overdue (3)</span>
+          <span class="chip">Paid (67)</span>
+        </div>
+
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></th>
+                <th>Invoice</th>
+                <th>Client</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr onclick="showPage('invoice-detail')">
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0083</span></td>
+                  <td>Bright Studio</td>
+                  <td class="td-muted">Mar 15, 2025</td>
+                  <td class="td-muted">Apr 15, 2025</td>
+                  <td class="font-semibold">$1,850.00</td>
+                  <td><span class="badge badge-warning badge-dot">Sent</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr onclick="showPage('invoice-detail')">
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0082</span></td>
+                  <td>Acme Corp</td>
+                  <td class="td-muted">Mar 10, 2025</td>
+                  <td class="td-muted">Apr 10, 2025</td>
+                  <td class="font-semibold">$4,200.00</td>
+                  <td><span class="badge badge-success badge-dot">Paid</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr onclick="showPage('invoice-detail')">
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0081</span></td>
+                  <td>TechVision Inc</td>
+                  <td class="td-muted">Feb 28, 2025</td>
+                  <td class="td-muted">Mar 28, 2025</td>
+                  <td class="font-semibold">$2,700.00</td>
+                  <td><span class="badge badge-error badge-dot">Overdue</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0080</span></td>
+                  <td>Loops Agency</td>
+                  <td class="td-muted">Feb 20, 2025</td>
+                  <td class="td-muted">Mar 20, 2025</td>
+                  <td class="font-semibold">$960.00</td>
+                  <td><span class="badge badge-success badge-dot">Paid</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0079</span></td>
+                  <td>Nova Design Co</td>
+                  <td class="td-muted">Feb 14, 2025</td>
+                  <td class="td-muted">Mar 14, 2025</td>
+                  <td class="font-semibold">$3,100.00</td>
+                  <td><span class="badge badge-neutral">Draft</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0078</span></td>
+                  <td>Stellar Media</td>
+                  <td class="td-muted">Feb 5, 2025</td>
+                  <td class="td-muted">Mar 5, 2025</td>
+                  <td class="font-semibold">$5,400.00</td>
+                  <td><span class="badge badge-success badge-dot">Paid</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;"><input type="checkbox" style="width:14px;height:14px;"></td>
+                  <td><span class="font-semibold">#INV-0077</span></td>
+                  <td>Blueprint Labs</td>
+                  <td class="td-muted">Jan 30, 2025</td>
+                  <td class="td-muted">Feb 28, 2025</td>
+                  <td class="font-semibold">$1,200.00</td>
+                  <td><span class="badge badge-error badge-dot">Overdue</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination -->
+          <div class="flex justify-between items-center" style="padding:14px 20px;border-top:1px solid var(--border);">
+            <span class="text-sm text-muted">Showing 1–7 of 83 invoices</span>
+            <div class="flex gap-8">
+              <button class="btn btn-secondary btn-sm">← Prev</button>
+              <button class="btn btn-secondary btn-sm" style="background:var(--primary-light);color:var(--primary);border-color:var(--primary);">1</button>
+              <button class="btn btn-secondary btn-sm">2</button>
+              <button class="btn btn-secondary btn-sm">3</button>
+              <button class="btn btn-secondary btn-sm">Next →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /invoices -->
+
+
+      <!-- ───────────────────────────
+           PAGE 3 · CREATE INVOICE
+      ─────────────────────────────── -->
+      <div class="page" id="page-create-invoice">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">New Invoice</div>
+            <div class="page-subtitle">Create and send an invoice in under 60 seconds.</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">Save Draft</button>
+            <button class="btn btn-secondary">Preview</button>
+            <button class="btn btn-primary">Send Invoice →</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;">
+
+          <!-- Main form -->
+          <div>
+            <!-- Invoice meta -->
+            <div class="card mb-16">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Invoice Details</div>
+              </div>
+              <div class="card-pad">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Invoice Number</label>
+                    <input class="form-input" value="#INV-0084" readonly style="background:var(--bg);">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">PO / Reference (optional)</label>
+                    <input class="form-input placeholder" placeholder="e.g. PO-2025-01">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Issue Date</label>
+                    <input class="form-input" type="date" value="2025-03-20">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Due Date</label>
+                    <input class="form-input" type="date" value="2025-04-19">
+                  </div>
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Payment Terms</label>
+                  <select class="form-select">
+                    <option>Net 30</option>
+                    <option>Net 15</option>
+                    <option>Net 60</option>
+                    <option>Due on receipt</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Line items -->
+            <div class="card mb-16">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Line Items</div>
+              </div>
+              <div class="card-pad">
+                <div class="invoice-line-header">
+                  <span>Description</span><span>Qty</span><span>Unit Price</span><span>Total</span><span></span>
+                </div>
+                <div class="invoice-line">
+                  <input class="form-input" value="Brand identity design">
+                  <input class="form-input" value="1" style="text-align:center;">
+                  <input class="form-input" value="$2,500.00">
+                  <input class="form-input" value="$2,500.00" readonly style="background:var(--bg);">
+                  <button class="btn btn-ghost btn-sm" style="color:var(--error);">✕</button>
+                </div>
+                <div class="invoice-line">
+                  <input class="form-input" value="UI/UX wireframes">
+                  <input class="form-input" value="3" style="text-align:center;">
+                  <input class="form-input" value="$450.00">
+                  <input class="form-input" value="$1,350.00" readonly style="background:var(--bg);">
+                  <button class="btn btn-ghost btn-sm" style="color:var(--error);">✕</button>
+                </div>
+                <div class="invoice-line">
+                  <input class="form-input placeholder" placeholder="Add item description…">
+                  <input class="form-input placeholder" placeholder="1">
+                  <input class="form-input placeholder" placeholder="$0.00">
+                  <input class="form-input" value="—" readonly style="background:var(--bg);color:var(--text-subtle);">
+                  <button class="btn btn-ghost btn-sm" style="color:var(--error);">✕</button>
+                </div>
+                <button class="btn btn-ghost btn-sm mt-8" style="color:var(--primary);">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>
+                  Add line item
+                </button>
+                <!-- Totals -->
+                <div class="invoice-totals">
+                  <div class="invoice-total-row"><span>Subtotal</span><span class="font-semibold">$3,850.00</span></div>
+                  <div class="invoice-total-row">
+                    <span>Tax (10%)</span><span class="font-semibold">$385.00</span>
+                  </div>
+                  <div class="invoice-total-row">
+                    <span>Discount</span><span class="font-semibold">— $0.00</span>
+                  </div>
+                  <div class="invoice-total-row grand"><span>Total Due</span><span>$4,235.00</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="card">
+              <div class="card-pad">
+                <div class="form-group" style="margin-bottom:10px;">
+                  <label class="form-label">Notes / Terms</label>
+                  <textarea class="form-input" rows="3" placeholder="Payment terms, bank details, thank you note…" style="resize:vertical;"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right panel -->
+          <div class="flex-col gap-16">
+
+            <!-- Client selector -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Bill To</div>
+              </div>
+              <div class="card-pad">
+                <div class="client-selector mb-12">
+                  <div class="client-selector-header">
+                    <div>
+                      <div class="client-selector-name">Bright Studio</div>
+                      <div class="client-selector-email">hello@brightstudio.io</div>
+                    </div>
+                    <button class="btn btn-ghost btn-sm">Change</button>
+                  </div>
+                </div>
+                <div class="text-sm text-muted">123 Creative Ave, Suite 4</div>
+                <div class="text-sm text-muted">San Francisco, CA 94103</div>
+              </div>
+            </div>
+
+            <!-- Currency & settings -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Settings</div>
+              </div>
+              <div class="card-pad flex-col gap-12">
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Currency</label>
+                  <select class="form-select"><option>USD — US Dollar</option><option>EUR</option><option>GBP</option></select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Tax Rate</label>
+                  <select class="form-select"><option>10% GST</option><option>0%</option><option>Custom</option></select>
+                </div>
+                <div class="divider" style="margin:4px 0;"></div>
+                <div class="toggle-wrap">
+                  <div class="toggle on"></div>
+                  <div>
+                    <div class="toggle-label">Auto reminders</div>
+                    <div class="toggle-sub">3 days before due</div>
+                  </div>
+                </div>
+                <div class="toggle-wrap">
+                  <div class="toggle"></div>
+                  <div>
+                    <div class="toggle-label">Recurring invoice</div>
+                    <div class="toggle-sub">Repeat monthly</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Send options -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Delivery</div>
+              </div>
+              <div class="card-pad flex-col gap-12">
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Send to</label>
+                  <input class="form-input" value="hello@brightstudio.io">
+                </div>
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Send via</label>
+                  <select class="form-select"><option>Email</option><option>Shareable link</option><option>Both</option></select>
+                </div>
+                <button class="btn btn-primary w-full" style="justify-content:center;">Send Invoice →</button>
+                <button class="btn btn-secondary w-full" style="justify-content:center;">Save as Draft</button>
+              </div>
+            </div>
+
+          </div><!-- /right panel -->
+        </div>
+
+      </div><!-- /create-invoice -->
+
+
+      <!-- ───────────────────────────
+           PAGE 4 · INVOICE DETAIL
+      ─────────────────────────────── -->
+      <div class="page" id="page-invoice-detail">
+
+        <div class="flex justify-between items-center mb-24">
+          <div>
+            <div class="flex items-center gap-12 mb-4">
+              <button class="btn btn-ghost btn-sm" onclick="showPage('invoices')" style="padding:4px 0;">← Back</button>
+              <span class="badge badge-warning badge-dot">Sent</span>
+            </div>
+            <div class="page-title">#INV-0083</div>
+            <div class="page-subtitle">Bright Studio · Issued Mar 15 · Due Apr 15, 2025</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">Download PDF</button>
+            <button class="btn btn-secondary">Duplicate</button>
+            <button class="btn btn-secondary" style="color:var(--error);">Void</button>
+            <button class="btn btn-primary">Record Payment</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;">
+
+          <!-- Invoice preview card -->
+          <div class="card">
+            <!-- Invoice header -->
+            <div style="padding:32px 36px;border-bottom:1px solid var(--border);">
+              <div class="flex justify-between items-center" style="margin-bottom:32px;">
+                <div>
+                  <div style="font-size:20px;font-weight:700;color:var(--primary);margin-bottom:2px;">InvoiceFlow</div>
+                  <div class="text-sm text-muted">Gabi Santos Design</div>
+                  <div class="text-sm text-muted">gabi@gabisantos.design</div>
+                </div>
+                <div class="text-right">
+                  <div style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;">INVOICE</div>
+                  <div class="text-sm text-muted">#INV-0083</div>
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <div>
+                  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);margin-bottom:6px;">Bill To</div>
+                  <div class="font-semibold">Bright Studio</div>
+                  <div class="text-sm text-muted">hello@brightstudio.io</div>
+                  <div class="text-sm text-muted">123 Creative Ave, Suite 4</div>
+                  <div class="text-sm text-muted">San Francisco, CA 94103</div>
+                </div>
+                <div class="text-right">
+                  <div style="margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);">Issue Date</div>
+                    <div class="font-semibold">March 15, 2025</div>
+                  </div>
+                  <div style="margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);">Due Date</div>
+                    <div class="font-semibold">April 15, 2025</div>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);">Amount Due</div>
+                    <div style="font-size:20px;font-weight:700;color:var(--primary);">$1,850.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Line items -->
+            <div style="padding:24px 36px;">
+              <table style="width:100%;">
+                <thead><tr style="border-bottom:2px solid var(--text);">
+                  <th style="text-align:left;padding:8px 0;font-size:12px;color:var(--text);">Description</th>
+                  <th style="text-align:center;padding:8px 0;font-size:12px;color:var(--text);">Qty</th>
+                  <th style="text-align:right;padding:8px 0;font-size:12px;color:var(--text);">Unit Price</th>
+                  <th style="text-align:right;padding:8px 0;font-size:12px;color:var(--text);">Total</th>
+                </tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:12px 0;">
+                      <div class="font-semibold">Brand identity design</div>
+                      <div class="text-sm text-muted">Full logo suite, brand guidelines</div>
+                    </td>
+                    <td style="text-align:center;padding:12px 0;">1</td>
+                    <td style="text-align:right;padding:12px 0;">$1,500.00</td>
+                    <td style="text-align:right;padding:12px 0;font-weight:600;">$1,500.00</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 0;">
+                      <div class="font-semibold">Social media kit</div>
+                      <div class="text-sm text-muted">10 templates</div>
+                    </td>
+                    <td style="text-align:center;padding:12px 0;">1</td>
+                    <td style="text-align:right;padding:12px 0;">$350.00</td>
+                    <td style="text-align:right;padding:12px 0;font-weight:600;">$350.00</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="width:240px;margin-left:auto;margin-top:20px;">
+                <div class="invoice-total-row"><span>Subtotal</span><span>$1,850.00</span></div>
+                <div class="invoice-total-row"><span>Tax (0%)</span><span>$0.00</span></div>
+                <div class="invoice-total-row grand"><span>Total Due</span><span style="color:var(--primary);">$1,850.00</span></div>
+              </div>
+              <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);">
+                <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);margin-bottom:6px;">Notes</div>
+                <div class="text-sm text-muted">Payment via bank transfer. BSB: 000-000, Account: 12345678. Thank you for your business!</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right panel -->
+          <div class="flex-col gap-16">
+
+            <!-- Payment status -->
+            <div class="card">
+              <div class="card-pad">
+                <div class="section-title mb-16">Payment Status</div>
+                <div style="padding:16px;background:var(--warning-light);border-radius:var(--radius-sm);border:1px solid #FDE68A;margin-bottom:16px;">
+                  <div style="font-size:12px;font-weight:600;color:#D97706;margin-bottom:2px;">AWAITING PAYMENT</div>
+                  <div style="font-size:20px;font-weight:700;color:var(--text);">$1,850.00</div>
+                  <div class="text-sm" style="color:#D97706;">Due Apr 15, 2025 · 26 days</div>
+                </div>
+                <button class="btn btn-primary w-full" style="justify-content:center;margin-bottom:8px;">Record Payment</button>
+                <button class="btn btn-secondary w-full" style="justify-content:center;">Send Reminder</button>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Timeline</div>
+              </div>
+              <div class="card-pad">
+                <div class="activity-item">
+                  <div class="activity-dot info"></div>
+                  <div>
+                    <div class="activity-text">Invoice sent to client</div>
+                    <div class="activity-time">Mar 15, 2025 · 10:22 AM</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot success"></div>
+                  <div>
+                    <div class="activity-text">Email opened by client</div>
+                    <div class="activity-time">Mar 15, 2025 · 2:48 PM</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot warning"></div>
+                  <div>
+                    <div class="activity-text">Invoice created as draft</div>
+                    <div class="activity-time">Mar 14, 2025 · 9:00 AM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick actions -->
+            <div class="card">
+              <div class="card-pad">
+                <div class="section-title mb-12">Actions</div>
+                <div class="flex-col gap-8">
+                  <button class="btn btn-secondary w-full" style="justify-content:flex-start;">📄 Download PDF</button>
+                  <button class="btn btn-secondary w-full" style="justify-content:flex-start;">🔗 Copy share link</button>
+                  <button class="btn btn-secondary w-full" style="justify-content:flex-start;">✏️ Edit invoice</button>
+                  <button class="btn btn-secondary w-full" style="justify-content:flex-start;">📋 Duplicate</button>
+                  <button class="btn btn-secondary w-full" style="justify-content:flex-start;color:var(--error);">🗑 Void invoice</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /invoice-detail -->
+
+
+      <!-- ───────────────────────────
+           PAGE 5 · CLIENTS LIST
+      ─────────────────────────────── -->
+      <div class="page" id="page-clients">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">Clients</div>
+            <div class="page-subtitle">24 active clients</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">Import</button>
+            <button class="btn btn-primary">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>
+              Add Client
+            </button>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="card mb-16" style="padding:12px 16px;">
+          <div class="header-search" style="width:100%;background:transparent;border:none;padding:0;font-size:14px;">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M10 10l3 3"/></svg>
+            Search clients by name, email, or company…
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th style="padding-left:20px;">Client</th>
+                <th>Email</th>
+                <th>Invoices</th>
+                <th>Total Billed</th>
+                <th>Outstanding</th>
+                <th>Last Invoice</th>
+                <th>Status</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr onclick="showPage('client-detail')">
+                  <td style="padding-left:20px;">
+                    <div class="flex items-center gap-12">
+                      <div class="avatar" style="background:#EEF2FF;color:var(--primary);">AC</div>
+                      <div>
+                        <div class="font-semibold">Acme Corp</div>
+                        <div class="text-sm text-muted">acme.co</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-muted">billing@acme.co</td>
+                  <td>14</td>
+                  <td class="font-semibold">$32,400</td>
+                  <td>$0</td>
+                  <td class="td-muted">Mar 10, 2025</td>
+                  <td><span class="badge badge-success badge-dot">Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr onclick="showPage('client-detail')">
+                  <td style="padding-left:20px;">
+                    <div class="flex items-center gap-12">
+                      <div class="avatar" style="background:#ECFEFF;color:var(--secondary);">BS</div>
+                      <div>
+                        <div class="font-semibold">Bright Studio</div>
+                        <div class="text-sm text-muted">brightstudio.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-muted">hello@brightstudio.io</td>
+                  <td>8</td>
+                  <td class="font-semibold">$18,200</td>
+                  <td class="font-semibold" style="color:var(--warning);">$1,850</td>
+                  <td class="td-muted">Mar 15, 2025</td>
+                  <td><span class="badge badge-success badge-dot">Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;">
+                    <div class="flex items-center gap-12">
+                      <div class="avatar" style="background:#FEF2F2;color:var(--error);">TV</div>
+                      <div>
+                        <div class="font-semibold">TechVision Inc</div>
+                        <div class="text-sm text-muted">techvision.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-muted">accounts@techvision.io</td>
+                  <td>6</td>
+                  <td class="font-semibold">$14,100</td>
+                  <td class="font-semibold" style="color:var(--error);">$2,700</td>
+                  <td class="td-muted">Feb 28, 2025</td>
+                  <td><span class="badge badge-error badge-dot">Overdue</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;">
+                    <div class="flex items-center gap-12">
+                      <div class="avatar" style="background:#F0FDF4;color:var(--success);">LA</div>
+                      <div>
+                        <div class="font-semibold">Loops Agency</div>
+                        <div class="text-sm text-muted">loops.co</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-muted">pay@loops.co</td>
+                  <td>5</td>
+                  <td class="font-semibold">$8,600</td>
+                  <td>$0</td>
+                  <td class="td-muted">Feb 20, 2025</td>
+                  <td><span class="badge badge-success badge-dot">Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+                <tr>
+                  <td style="padding-left:20px;">
+                    <div class="flex items-center gap-12">
+                      <div class="avatar" style="background:#EEF2FF;color:var(--primary);">ND</div>
+                      <div>
+                        <div class="font-semibold">Nova Design Co</div>
+                        <div class="text-sm text-muted">novadesign.co</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-muted">invoice@novadesign.co</td>
+                  <td>3</td>
+                  <td class="font-semibold">$6,900</td>
+                  <td>$0</td>
+                  <td class="td-muted">Feb 14, 2025</td>
+                  <td><span class="badge badge-neutral">New</span></td>
+                  <td><button class="btn btn-ghost btn-sm">···</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /clients -->
+
+
+      <!-- ───────────────────────────
+           PAGE 6 · CLIENT DETAIL
+      ─────────────────────────────── -->
+      <div class="page" id="page-client-detail">
+
+        <div class="flex justify-between items-center mb-20">
+          <div>
+            <button class="btn btn-ghost btn-sm" onclick="showPage('clients')" style="padding:4px 0;margin-bottom:8px;">← Back to Clients</button>
+            <div class="flex items-center gap-16">
+              <div class="avatar" style="width:48px;height:48px;font-size:16px;background:#EEF2FF;color:var(--primary);">AC</div>
+              <div>
+                <div class="page-title">Acme Corp</div>
+                <div class="page-subtitle">acme.co · billing@acme.co · 14 invoices</div>
+              </div>
+              <span class="badge badge-success badge-dot">Active</span>
+            </div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">Edit Client</button>
+            <button class="btn btn-primary" onclick="showPage('create-invoice')">New Invoice</button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="three-col mb-20">
+          <div class="stat-card">
+            <div class="stat-label">Total Billed</div>
+            <div class="stat-value" style="font-size:22px;">$32,400</div>
+            <div class="stat-change neutral">14 invoices</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Outstanding</div>
+            <div class="stat-value" style="font-size:22px;">$0</div>
+            <div class="stat-change up">All invoices paid</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg. Pay Time</div>
+            <div class="stat-value" style="font-size:22px;">8 days</div>
+            <div class="stat-change up">↑ Excellent payer</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="flex-col gap-16">
+            <!-- Invoices table -->
+            <div class="card">
+              <div class="card-pad flex justify-between items-center" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Invoice History</div>
+                <button class="btn btn-primary btn-sm" onclick="showPage('create-invoice')">New Invoice</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr>
+                    <th>Invoice</th><th>Date</th><th>Amount</th><th>Status</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td>#INV-0082</td><td class="td-muted">Mar 10, 2025</td><td class="font-semibold">$4,200</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                    <tr><td>#INV-0071</td><td class="td-muted">Feb 01, 2025</td><td class="font-semibold">$3,800</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                    <tr><td>#INV-0063</td><td class="td-muted">Jan 05, 2025</td><td class="font-semibold">$5,100</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                    <tr><td>#INV-0054</td><td class="td-muted">Dec 10, 2024</td><td class="font-semibold">$2,800</td><td><span class="badge badge-success badge-dot">Paid</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client info -->
+          <div class="flex-col gap-16">
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Contact Details</div>
+              </div>
+              <div class="card-pad flex-col gap-12">
+                <div>
+                  <div class="form-label">Company Name</div>
+                  <div class="font-semibold">Acme Corp</div>
+                </div>
+                <div>
+                  <div class="form-label">Primary Contact</div>
+                  <div class="font-semibold">Alex Johnson</div>
+                </div>
+                <div>
+                  <div class="form-label">Email</div>
+                  <div class="font-semibold" style="color:var(--primary);">billing@acme.co</div>
+                </div>
+                <div>
+                  <div class="form-label">Phone</div>
+                  <div class="font-semibold">+1 (415) 555-0192</div>
+                </div>
+                <div>
+                  <div class="form-label">Address</div>
+                  <div class="font-semibold">500 Market St, Suite 20<br>San Francisco, CA 94105</div>
+                </div>
+                <div>
+                  <div class="form-label">Payment Terms</div>
+                  <div class="font-semibold">Net 30</div>
+                </div>
+                <button class="btn btn-secondary w-full" style="justify-content:center;margin-top:4px;">Edit Details</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Notes</div>
+              </div>
+              <div class="card-pad">
+                <div class="text-sm text-muted" style="line-height:1.7;">Long-term client since 2023. Prefers invoices sent on the 10th of each month. Key contact is Alex Johnson in Finance.</div>
+                <button class="btn btn-ghost btn-sm mt-12" style="color:var(--primary);">+ Add note</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /client-detail -->
+
+
+      <!-- ───────────────────────────
+           PAGE 7 · PAYMENTS OVERVIEW
+      ─────────────────────────────── -->
+      <div class="page" id="page-payments">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">Payments</div>
+            <div class="page-subtitle">Track received payments and outstanding balances.</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary">Export</button>
+            <button class="btn btn-primary">Record Payment</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid mb-24">
+          <div class="stat-card">
+            <div class="stat-label">Received This Month</div>
+            <div class="stat-value">$18,400</div>
+            <div class="stat-change up">↑ 8.2% vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Outstanding</div>
+            <div class="stat-value">$12,480</div>
+            <div class="stat-change neutral">8 invoices</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Overdue</div>
+            <div class="stat-value">$3,200</div>
+            <div class="stat-change down">3 clients</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg. Collection Time</div>
+            <div class="stat-value">11 days</div>
+            <div class="stat-change up">↑ 2d faster</div>
+          </div>
+        </div>
+
+        <div class="two-col mb-20">
+          <!-- Chart -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Cash Flow</div>
+              <div class="section-subtitle">Payments received vs invoiced (last 6 months)</div>
+            </div>
+            <div style="height:180px;padding:8px 16px 0;">
+              <div class="chart-bars" style="height:160px;align-items:flex-end;gap:16px;">
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar" style="height:60%;flex:1;"></div>
+                  <div class="chart-bar" style="height:75%;flex:1;background:var(--success-light);"></div>
+                </div>
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar" style="height:72%;flex:1;"></div>
+                  <div class="chart-bar" style="height:65%;flex:1;background:var(--success-light);"></div>
+                </div>
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar" style="height:55%;flex:1;"></div>
+                  <div class="chart-bar" style="height:80%;flex:1;background:var(--success-light);"></div>
+                </div>
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar" style="height:85%;flex:1;"></div>
+                  <div class="chart-bar" style="height:78%;flex:1;background:var(--success-light);"></div>
+                </div>
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar" style="height:78%;flex:1;"></div>
+                  <div class="chart-bar" style="height:85%;flex:1;background:var(--success-light);"></div>
+                </div>
+                <div style="flex:1;display:flex;gap:4px;align-items:flex-end;">
+                  <div class="chart-bar highlight" style="height:90%;flex:1;"></div>
+                  <div class="chart-bar" style="height:72%;flex:1;background:#D1FAE5;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 24px 14px;font-size:11px;color:var(--text-subtle);">
+              <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
+            </div>
+            <div style="padding:0 20px 14px;display:flex;gap:16px;">
+              <div class="flex items-center gap-4"><div style="width:10px;height:10px;background:var(--primary);border-radius:2px;"></div><span class="text-sm text-muted">Invoiced</span></div>
+              <div class="flex items-center gap-4"><div style="width:10px;height:10px;background:var(--success);border-radius:2px;"></div><span class="text-sm text-muted">Received</span></div>
+            </div>
+          </div>
+
+          <!-- Overdue clients -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Overdue Payments</div>
+              <div class="section-subtitle">Requires attention</div>
+            </div>
+            <div class="card-pad">
+              <div class="activity-item">
+                <div style="flex:1;">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="font-semibold">TechVision Inc</div>
+                    <span class="font-bold" style="color:var(--error);">$2,700</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-sm text-muted">#INV-0081 · 21 days overdue</div>
+                    <button class="btn btn-ghost btn-sm" style="padding:2px 6px;font-size:11px;color:var(--primary);">Send reminder</button>
+                  </div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div style="flex:1;">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="font-semibold">Blueprint Labs</div>
+                    <span class="font-bold" style="color:var(--error);">$1,200</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-sm text-muted">#INV-0077 · 18 days overdue</div>
+                    <button class="btn btn-ghost btn-sm" style="padding:2px 6px;font-size:11px;color:var(--primary);">Send reminder</button>
+                  </div>
+                </div>
+              </div>
+              <div class="activity-item" style="border:none;">
+                <div style="flex:1;">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="font-semibold">Delta Works</div>
+                    <span class="font-bold" style="color:var(--warning);">$800</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-sm text-muted">#INV-0075 · 5 days overdue</div>
+                    <button class="btn btn-ghost btn-sm" style="padding:2px 6px;font-size:11px;color:var(--primary);">Send reminder</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment history table -->
+        <div class="card">
+          <div class="card-pad flex justify-between items-center" style="border-bottom:1px solid var(--border);">
+            <div class="section-title">Payment History</div>
+            <div class="flex gap-8">
+              <span class="chip">All time</span>
+              <span class="chip">This month</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>Date</th><th>Client</th><th>Invoice</th><th>Method</th><th>Amount</th><th>Status</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="td-muted">Mar 18, 2025</td><td>Acme Corp</td><td>#INV-0082</td><td class="td-muted">Bank Transfer</td><td class="font-semibold">$4,200.00</td><td><span class="badge badge-success badge-dot">Cleared</span></td></tr>
+                <tr><td class="td-muted">Mar 05, 2025</td><td>Loops Agency</td><td>#INV-0080</td><td class="td-muted">Credit Card</td><td class="font-semibold">$960.00</td><td><span class="badge badge-success badge-dot">Cleared</span></td></tr>
+                <tr><td class="td-muted">Feb 28, 2025</td><td>Stellar Media</td><td>#INV-0078</td><td class="td-muted">PayPal</td><td class="font-semibold">$5,400.00</td><td><span class="badge badge-success badge-dot">Cleared</span></td></tr>
+                <tr><td class="td-muted">Feb 12, 2025</td><td>Nova Design Co</td><td>#INV-0074</td><td class="td-muted">Bank Transfer</td><td class="font-semibold">$3,100.00</td><td><span class="badge badge-success badge-dot">Cleared</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /payments -->
+
+
+      <!-- ───────────────────────────
+           PAGE 8 · AUTOMATIONS
+      ─────────────────────────────── -->
+      <div class="page" id="page-automations">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">Automations</div>
+            <div class="page-subtitle">Set up billing workflows that run automatically.</div>
+          </div>
+          <button class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>
+            New Workflow
+          </button>
+        </div>
+
+        <!-- Active workflows -->
+        <div class="flex-col gap-12 mb-24">
+
+          <!-- Workflow 1 -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-12">
+                  <div style="width:36px;height:36px;background:var(--primary-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">⏰</div>
+                  <div>
+                    <div class="font-semibold">Payment Reminder — 3 days before due</div>
+                    <div class="text-sm text-muted">Triggered 14 times this month · Last run 2 hours ago</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-12">
+                  <span class="badge badge-success badge-dot">Active</span>
+                  <div class="toggle on"></div>
+                  <button class="btn btn-ghost btn-sm">···</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-pad">
+              <div class="workflow-canvas" style="min-height:100px;padding:20px 28px;">
+                <div class="wf-node trigger">
+                  <div class="wf-node-label">Trigger</div>
+                  <div class="wf-node-title">Invoice Due</div>
+                  <div class="wf-node-sub">3 days before</div>
+                </div>
+                <div class="wf-arrow">→</div>
+                <div class="wf-node condition">
+                  <div class="wf-node-label">Condition</div>
+                  <div class="wf-node-title">Still Unpaid?</div>
+                  <div class="wf-node-sub">Check status</div>
+                </div>
+                <div class="wf-arrow">→</div>
+                <div class="wf-node action">
+                  <div class="wf-node-label">Action</div>
+                  <div class="wf-node-title">Send Email</div>
+                  <div class="wf-node-sub">Reminder template</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workflow 2 -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-12">
+                  <div style="width:36px;height:36px;background:var(--success-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">🔄</div>
+                  <div>
+                    <div class="font-semibold">Monthly Recurring Billing — Acme Corp</div>
+                    <div class="text-sm text-muted">Next run Apr 10, 2025 · Runs monthly</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-12">
+                  <span class="badge badge-success badge-dot">Active</span>
+                  <div class="toggle on"></div>
+                  <button class="btn btn-ghost btn-sm">···</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-pad">
+              <div class="workflow-canvas" style="min-height:100px;padding:20px 28px;">
+                <div class="wf-node trigger">
+                  <div class="wf-node-label">Trigger</div>
+                  <div class="wf-node-title">Schedule</div>
+                  <div class="wf-node-sub">10th of month</div>
+                </div>
+                <div class="wf-arrow">→</div>
+                <div class="wf-node action">
+                  <div class="wf-node-label">Action</div>
+                  <div class="wf-node-title">Create Invoice</div>
+                  <div class="wf-node-sub">From template</div>
+                </div>
+                <div class="wf-arrow">→</div>
+                <div class="wf-node action">
+                  <div class="wf-node-label">Action</div>
+                  <div class="wf-node-title">Send Invoice</div>
+                  <div class="wf-node-sub">To billing@acme.co</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workflow 3 -->
+          <div class="card">
+            <div class="card-pad">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-12">
+                  <div style="width:36px;height:36px;background:var(--warning-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">🚨</div>
+                  <div>
+                    <div class="font-semibold">Overdue Escalation — 7 days overdue</div>
+                    <div class="text-sm text-muted">Triggered 3 times this month</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-12">
+                  <span class="badge badge-neutral">Paused</span>
+                  <div class="toggle"></div>
+                  <button class="btn btn-ghost btn-sm">···</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Templates -->
+        <div class="section-header">
+          <div>
+            <div class="section-title">Workflow Templates</div>
+            <div class="section-subtitle">Get started quickly with pre-built automations</div>
+          </div>
+        </div>
+        <div class="three-col">
+          <div class="card card-pad" style="cursor:pointer;">
+            <div style="font-size:24px;margin-bottom:10px;">📧</div>
+            <div class="font-semibold mb-4">Auto Payment Reminder</div>
+            <div class="text-sm text-muted" style="margin-bottom:14px;">Send reminders before and after due dates automatically.</div>
+            <button class="btn btn-secondary btn-sm">Use Template</button>
+          </div>
+          <div class="card card-pad" style="cursor:pointer;">
+            <div style="font-size:24px;margin-bottom:10px;">🔄</div>
+            <div class="font-semibold mb-4">Recurring Billing</div>
+            <div class="text-sm text-muted" style="margin-bottom:14px;">Auto-create and send invoices on a set schedule.</div>
+            <button class="btn btn-secondary btn-sm">Use Template</button>
+          </div>
+          <div class="card card-pad" style="cursor:pointer;">
+            <div style="font-size:24px;margin-bottom:10px;">✅</div>
+            <div class="font-semibold mb-4">Payment Confirmation</div>
+            <div class="text-sm text-muted" style="margin-bottom:14px;">Send thank-you emails when a payment is received.</div>
+            <button class="btn btn-secondary btn-sm">Use Template</button>
+          </div>
+        </div>
+
+      </div><!-- /automations -->
+
+
+      <!-- ───────────────────────────
+           PAGE 9 · REPORTS
+      ─────────────────────────────── -->
+      <div class="page" id="page-reports">
+
+        <div class="flex justify-between items-center mb-24">
+          <div class="page-title-block" style="margin:0;">
+            <div class="page-title">Reports</div>
+            <div class="page-subtitle">Financial insights for your business.</div>
+          </div>
+          <div class="flex gap-8">
+            <select class="form-select" style="width:140px;">
+              <option>This Year</option>
+              <option>Last Year</option>
+              <option>Q1 2025</option>
+            </select>
+            <button class="btn btn-secondary">Export PDF</button>
+          </div>
+        </div>
+
+        <!-- Summary stats -->
+        <div class="stats-grid mb-24">
+          <div class="stat-card">
+            <div class="stat-label">Total Revenue (YTD)</div>
+            <div class="stat-value">$48,290</div>
+            <div class="stat-change up">↑ 18.4% vs 2024</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Invoiced</div>
+            <div class="stat-value">$63,970</div>
+            <div class="stat-change neutral">83 invoices</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Collection Rate</div>
+            <div class="stat-value">75.5%</div>
+            <div class="stat-change up">↑ 4.2% vs 2024</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Invoice Value</div>
+            <div class="stat-value">$770</div>
+            <div class="stat-change up">↑ $120 vs 2024</div>
+          </div>
+        </div>
+
+        <!-- Two charts -->
+        <div class="two-col mb-24">
+          <!-- Revenue chart -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Monthly Revenue</div>
+              <div class="section-subtitle">2025 year to date</div>
+            </div>
+            <div style="height:200px;padding:8px 16px 0;">
+              <div class="chart-bars" style="height:180px;">
+                <div class="chart-bar" style="height:40%;"></div>
+                <div class="chart-bar" style="height:55%;"></div>
+                <div class="chart-bar highlight" style="height:75%;"></div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-around;padding:6px 24px 14px;font-size:11px;color:var(--text-subtle);">
+              <span>Jan<br><strong style="color:var(--text);">$12,400</strong></span>
+              <span>Feb<br><strong style="color:var(--text);">$17,490</strong></span>
+              <span>Mar<br><strong style="color:var(--text);">$18,400</strong></span>
+            </div>
+          </div>
+
+          <!-- Top clients -->
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Top Clients by Revenue</div>
+            </div>
+            <div class="card-pad flex-col gap-12">
+              <div>
+                <div class="flex justify-between text-sm mb-4"><span class="font-semibold">Acme Corp</span><span>$32,400 <span class="text-muted">(34%)</span></span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:67%;background:var(--primary);"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-4"><span class="font-semibold">Stellar Media</span><span>$18,200 <span class="text-muted">(19%)</span></span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:38%;background:var(--secondary);"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-4"><span class="font-semibold">TechVision Inc</span><span>$14,100 <span class="text-muted">(15%)</span></span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:29%;background:var(--success);"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-4"><span class="font-semibold">Loops Agency</span><span>$8,600 <span class="text-muted">(9%)</span></span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:17%;background:var(--warning);"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-4"><span class="font-semibold">Others</span><span>$22,070 <span class="text-muted">(23%)</span></span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:45%;background:var(--border);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice status breakdown -->
+        <div class="two-col">
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Invoice Status Breakdown</div>
+            </div>
+            <div class="card-pad">
+              <div class="flex items-center gap-24">
+                <div class="donut-placeholder">
+                  <div class="donut-hole" style="font-size:12px;">83 inv</div>
+                </div>
+                <div class="flex-col gap-10" style="flex:1;">
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-8"><div style="width:10px;height:10px;background:var(--primary);border-radius:2px;"></div><span class="text-sm">Paid</span></div>
+                    <span class="text-sm font-semibold">67 (81%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-8"><div style="width:10px;height:10px;background:var(--secondary);border-radius:2px;"></div><span class="text-sm">Sent</span></div>
+                    <span class="text-sm font-semibold">8 (10%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-8"><div style="width:10px;height:10px;background:var(--success);border-radius:2px;"></div><span class="text-sm">Overdue</span></div>
+                    <span class="text-sm font-semibold">3 (4%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-8"><div style="width:10px;height:10px;background:var(--border);border-radius:2px;"></div><span class="text-sm">Draft</span></div>
+                    <span class="text-sm font-semibold">5 (6%)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-pad" style="border-bottom:1px solid var(--border);">
+              <div class="section-title">Tax Summary</div>
+            </div>
+            <div class="card-pad flex-col gap-12">
+              <div class="flex justify-between text-sm">
+                <span class="text-muted">Total Invoiced (excl. tax)</span>
+                <span class="font-semibold">$57,242</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-muted">GST Collected (10%)</span>
+                <span class="font-semibold">$5,724</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-muted">GST Payable (Q1)</span>
+                <span class="font-semibold" style="color:var(--warning);">$1,840</span>
+              </div>
+              <div class="divider" style="margin:4px 0;"></div>
+              <div class="flex justify-between">
+                <span class="font-semibold">Net Revenue (YTD)</span>
+                <span class="font-bold" style="font-size:16px;">$48,290</span>
+              </div>
+              <button class="btn btn-secondary w-full mt-8" style="justify-content:center;">Export Tax Report</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /reports -->
+
+
+      <!-- ───────────────────────────
+           PAGE 10 · SETTINGS
+      ─────────────────────────────── -->
+      <div class="page" id="page-settings">
+
+        <div class="page-title-block mb-24">
+          <div class="page-title">Settings</div>
+          <div class="page-subtitle">Manage your account, branding, and preferences.</div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Settings menu -->
+          <div class="settings-menu">
+            <div class="settings-menu-item active">Profile</div>
+            <div class="settings-menu-item">Business</div>
+            <div class="settings-menu-item">Branding</div>
+            <div class="settings-menu-item">Invoices</div>
+            <div class="settings-menu-item">Payments</div>
+            <div class="settings-menu-item">Notifications</div>
+            <div class="settings-menu-item">Team</div>
+            <div class="settings-menu-item">Integrations</div>
+            <div class="settings-menu-item">Billing</div>
+            <div class="settings-menu-item" style="color:var(--error);margin-top:16px;">Danger Zone</div>
+          </div>
+
+          <!-- Settings content -->
+          <div class="flex-col gap-16">
+
+            <!-- Profile section -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Profile</div>
+                <div class="section-subtitle">Your personal account details</div>
+              </div>
+              <div class="card-pad">
+                <div class="flex items-center gap-16 mb-20">
+                  <div class="avatar" style="width:64px;height:64px;font-size:20px;background:var(--primary-light);color:var(--primary);">GS</div>
+                  <div>
+                    <button class="btn btn-secondary btn-sm">Upload photo</button>
+                    <div class="text-sm text-muted mt-4">JPG, PNG up to 2MB</div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input class="form-input" value="Gabi">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input class="form-input" value="Santos">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input class="form-input" value="gabi@gabisantos.design">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Time Zone</label>
+                  <select class="form-select"><option>UTC-8 — Pacific Time (US)</option></select>
+                </div>
+                <button class="btn btn-primary">Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card">
+              <div class="card-pad" style="border-bottom:1px solid var(--border);">
+                <div class="section-title">Notifications</div>
+              </div>
+              <div class="card-pad flex-col gap-16">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="toggle-label">Invoice paid</div>
+                    <div class="toggle-sub">Notify when a client pays an invoice</div>
+                  </div>
+                  <div class="toggle on"></div>
+                </div>
+                <div class="divider" style="margin:0;"></div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="toggle-label">Invoice overdue</div>
+                    <div class="toggle-sub">Notify when an invoice becomes overdue</div>
+                  </div>
+                  <div class="toggle on"></div>
+                </div>
+                <div class="divider" style="margin:0;"></div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="toggle-label">Weekly summary</div>
+                    <div class="toggle-sub">Receive a weekly revenue summary email</div>
+                  </div>
+                  <div class="toggle"></div>
+                </div>
+                <div class="divider" style="margin:0;"></div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="toggle-label">Automation runs</div>
+                    <div class="toggle-sub">Notify when a workflow automation fires</div>
+                  </div>
+                  <div class="toggle on"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan -->
+            <div class="card">
+              <div class="card-pad flex justify-between items-center">
+                <div>
+                  <div class="section-title">Current Plan</div>
+                  <div class="flex items-center gap-8 mt-4">
+                    <span class="badge badge-info">Pro</span>
+                    <span class="text-sm text-muted">$19/month · Renews Apr 20, 2025</span>
+                  </div>
+                </div>
+                <button class="btn btn-secondary">Manage Plan</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /settings -->
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+  const pageTitles = {
+    'dashboard': 'Dashboard',
+    'invoices': 'Invoices',
+    'create-invoice': 'New Invoice',
+    'invoice-detail': 'Invoice #INV-0083',
+    'clients': 'Clients',
+    'client-detail': 'Acme Corp',
+    'payments': 'Payments',
+    'automations': 'Automations',
+    'reports': 'Reports',
+    'settings': 'Settings',
+  };
+
+  const navMap = {
+    'dashboard': 'dashboard',
+    'invoices': 'invoices',
+    'create-invoice': 'invoices',
+    'invoice-detail': 'invoices',
+    'clients': 'clients',
+    'client-detail': 'clients',
+    'payments': 'payments',
+    'automations': 'automations',
+    'reports': 'reports',
+    'settings': 'settings',
+  };
+
+  function showPage(id) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Show target
+    const target = document.getElementById('page-' + id);
+    if (target) target.classList.add('active');
+    // Update header title
+    document.getElementById('header-title').textContent = pageTitles[id] || id;
+    // Update nav
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const activeNav = navMap[id];
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + activeNav + "'")) {
+        n.classList.add('active');
+      }
+    });
+    // Scroll to top
+    document.querySelector('.content').scrollTop = 0;
+  }
+</script>
+
+</body>
+</html>
